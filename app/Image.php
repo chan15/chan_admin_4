@@ -1,7 +1,5 @@
 <?php namespace Chan;
 
-use upload;
-
 class Image
 {
     static $imageUploadRatio   = 1000;
