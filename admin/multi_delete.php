@@ -22,11 +22,6 @@ foreach ($ids as $id) {
 			$db->fileDeleteArray[] = $db->getFileName('image');
 			$db->dataFileDelete($path);
             break;
-        case 'products':
-			$path = '../uploads/products/';
-			$db->fileDeleteArray[] = $db->getFileName('image');
-			$db->dataFileDelete($path);
-            break;
     }
 
 	$db->delete();
