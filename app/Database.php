@@ -188,7 +188,7 @@ class Database
      * Bind PDO value
      *
      * $param string $value
-     * $param string $type (bool|null|int|str)
+     * $param string $type (bool|null|int|str|date)
      * @return void
      */
     public function addValue($value, $type = 'str')
@@ -263,7 +263,7 @@ class Database
             $index = 1;
 
             foreach ($this->valueArray as $item) {
-                $result->bindValue($index, $item['value'], $this->_paramType[$item['type']]);
+                $result->bindValue($index, $item['value'], $this->paramType[$item['type']]);
                 $index++;
             }
         }
@@ -308,13 +308,13 @@ class Database
 
         if (count($this->valueArray) > 0) {
             foreach ($this->valueArray as $item) {
-                $result->bindValue($index, $item['value'], $this->_paramType[$item['type']]);
+                $result->bindValue($index, $item['value'], $this->paramType[$item['type']]);
                 $index++;
             }
         }
 
         if ($where === null) {
-            $result->bindValue($index, $this->pkValue, $this->_paramType['int']);
+            $result->bindValue($index, $this->pkValue, $this->paramType['int']);
         }
 
         $this->pk = '';
@@ -368,13 +368,13 @@ class Database
 
         if (count($this->valueArray) > 0) {
             foreach ($this->valueArray as $item) {
-                $result->bindValue($index, $item['value'], $this->_paramType[$item['type']]);
+                $result->bindValue($index, $item['value'], $this->paramType[$item['type']]);
                 $index++;
             }
         }
 
         if ($where === null) {
-            $result->bindValue($index, $this->pkValue, $this->_paramType['int']);
+            $result->bindValue($index, $this->pkValue, $this->paramType['int']);
         }
 
         $this->clearFields();
@@ -442,7 +442,7 @@ class Database
 
         if (count($this->valueArray) > 0) {
             foreach ($this->valueArray as $item) {
-                $result->bindValue($index, $item['value'], $this->_paramType[$item['type']]);
+                $result->bindValue($index, $item['value'], $this->paramType[$item['type']]);
                 $index++;
             }
         }
