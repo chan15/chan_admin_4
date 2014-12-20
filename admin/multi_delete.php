@@ -19,7 +19,7 @@ foreach ($ids as $id) {
 	switch($tableField) {
         case 'table':
 			$path = '../uploads/test/';
-			$db->fileDeleteArray[] = $db->getFileName('image');
+			$db->deleteFiles[] = $db->getFileName('image');
 			$db->dataFileDelete($path);
             break;
     }
@@ -38,7 +38,7 @@ foreach ($ids as $id) {
                     $db->table = 'detail_table';
                     $db->pk = 'id';
                     $db->pkValue = $detail['id'];
-                    $db->fileDeleteArray[] = $detail['image'];
+                    $db->fileDeletes[] = $detail['image'];
                     $db->dataFileDelete($path);
                     $db->delete();
                 }

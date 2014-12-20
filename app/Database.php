@@ -4,43 +4,44 @@ use \PDO;
 
 class Database
 {
-    public $makeRecordCount  = true;
-    public $recordCount      = 0;
-    public $totalRecordCount = 0;
-    public $fieldArray       = array();
-    public $valueArray       = array();
-    public $sqlErrorMessage  = '';
-    public $table            = '';
-    public $pk               = '';
-    public $pkValue          = '';
-    private $dbh             = null;
-    private $dbhRead         = null;
-    private $dbhWrite        = null;
-    private $stmt;
-    public $fileDeleteArray = array();
-    public $page       = 0;
-    public $totalPages = 0;
-    private $_paramType = array(
-        'bool' => PDO::PARAM_BOOL,
-        'null' => PDO::PARAM_NULL,
-        'int'  => PDO::PARAM_INT,
-        'str'  => PDO::PARAM_STR,
-        'date' => PDO::PARAM_STR,
-    );
-    public $_langPrevPage = '上一頁';
-    public $_langFirstPage = '第一頁';
-    public $_langNextPage = '下一頁';
-    public $_langLastPage = '最後頁';
-    public $_langInput = '請填寫';
-    public $_langDuplicate = '重複';
+    public $makeRecordCount    = true;
+    public $recordCount        = 0;
+    public $totalRecordCount   = 0;
+    public $fieldArray         = array();
+    public $valueArray         = array();
+    public $sqlErrorMessage    = '';
+    public $table              = '';
+    public $pk                 = '';
+    public $pkValue            = '';
+    private $dbh               = null;
+    private $dbhRead           = null;
+    private $dbhWrite          = null;
+    private $stmt              = null;
+    public $deleteFiles        = array();
+    public $page               = 0;
+    public $totalPages         = 0;
+    private $paramType         = array();
+    public $_langPrevPage      = '上一頁';
+    public $_langFirstPage     = '第一頁';
+    public $_langNextPage      = '下一頁';
+    public $_langLastPage      = '最後頁';
+    public $_langInput         = '請填寫';
+    public $_langDuplicate     = '重複';
     public $_langFormatInvalid = '格式錯誤';
-    public $_langOverLength = '超過字數';
-    public $_langUrlError = '連結方式錯誤';
-    public $_langSelect = '請選擇';
-    public $_langFileNotExist = '檔案不存在';
+    public $_langOverLength    = '超過字數';
+    public $_langUrlError      = '連結方式錯誤';
+    public $_langSelect        = '請選擇';
+    public $_langFileNotExist  = '檔案不存在';
 
     public function __construct($configName = 'default'){
-        // Open connection
+        $this->paramType = array(
+            'bool' => PDO::PARAM_BOOL,
+            'null' => PDO::PARAM_NULL,
+            'int'  => PDO::PARAM_INT,
+            'str'  => PDO::PARAM_STR,
+            'date' => PDO::PARAM_STR,
+        );
+
         $config = include dirname(__DIR__) . '/config/database.php';
         $config = $config[$configName];
         $dsnRead = null;
@@ -215,16 +216,18 @@ class Database
 
     /**
      * Delte file from database
+     *
      * @param string $path file path
+     * @return void
      **/
-    public function dataFileDelete($path)
+    public function dataFileDelete($path = null)
     {
-        if (count($this->fileDeleteArray) > 0) {
-            if (is_dir($path)) {
-                foreach ($this->fileDeleteArray as $fileName) {
-                    @unlink($path . $fileName);
+        if (count($this->deleteFiles) > 0) {
+            if (is_dir($path) === true) {
+                foreach ($this->deleteFiles as $fileName) {
+                    File::delete($path . $fileName);
                     $fileDelHead = explode('.', $fileName);
-                    $thumbDir = $path . '/thumbnails/';
+                    $thumbDir = $path . 'thumbnails/';
                     $handle = @opendir($thumbDir);
 
                     while ($file = readdir($handle)) {
@@ -232,7 +235,7 @@ class Database
                             $fileDel = explode('_', $file);
 
                             if ($fileDelHead[0] === $fileDel[0]) {
-                                unlink($thumbDir . $file);
+                                File::delete($thumbDir . $file);
                             }
                         }
                     }

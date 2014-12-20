@@ -37,4 +37,15 @@ class File
             'path'       => $path
         );
     }
+
+    /**
+     * Delete file
+     *
+     * @param string $path
+     * @return boolean
+     */
+    public static function delete($path = null)
+    {
+        return @unlink($path);
+    }
 }
