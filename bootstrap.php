@@ -1,6 +1,6 @@
 <?php
 
-error_reporting(E_ALL);
+error_reporting(0);
 session_start();
 header('Content-type: text/html; charset=utf-8');
 include 'const.php';
