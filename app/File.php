@@ -1,5 +1,7 @@
 <?php namespace Chan;
 
+use \upload;
+
 class File
 {
     static $fileUploadSize = 5242880;
