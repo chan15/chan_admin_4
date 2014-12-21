@@ -5,7 +5,8 @@
         "phpoffice/phpexcel": "1.8.0",
         "sunra/php-simple-html-dom-parser": "dev-master",
         "swiftmailer/swiftmailer": "5.3.*@dev",
-        "sybio/image-workshop": "dev-master"
+        "sybio/image-workshop": "dev-master",
+        "phpunit/phpunit": "~4.4"
     },
     "autoload": {
         "files": [
