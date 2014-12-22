@@ -1,16 +1,16 @@
 <?php
 
 return array(
+    'bool'      => ' should be boolean',
+    'email'     => ' must be a valid email address',
+    'file'      => ' is required',
+    'integer'   => ' should be an integer',
+    'length'    => ' length should be ',
+    'max'       => ' may not be greater than ',
+    'maxLength' => ' may not be greater than ',
+    'min'       => ' must be at least ',
+    'minLength' => ' must be at least ',
     'required'  => ' is required',
     'unique'    => ' is duplicated',
-    'file'      => ' is required',
-    'length'    => ' length should be ',
-    'maxLength' => ' may not be greater than ',
-    'minLength' => ' must be at least ',
-    'integer'   => ' should be an integer',
-    'bool'      => ' should be boolean',
     'url'       => ' format is invalid',
-    'max'       => ' may not be greater than ',
-    'min'       => ' must be at least ',
-    'email'     => ' must be a valid email address',
 );
