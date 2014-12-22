@@ -48,8 +48,32 @@ class File
      */
     public static function delete($path = null)
     {
-        if (file_exists($path) === true) {
+        if ($path !== null) {
             return @unlink($path);
+        }
+
+        return false;
+    }
+
+    /**
+     * Delete directory
+     *
+     * @param string $path
+     * @return boolean
+     */
+    public static function deleteDir($path = null)
+    {
+        if ($path !== null) {
+            $files = array_diff(scandir($path), array('.', '..'));
+
+            if (count($files) > 0) {
+                foreach ($files as $file) {
+                    $target = $path . $file;
+                    (is_dir($target) === true) ? static::deleteDir($target . '/') : @unlink($target);
+                }
+            }
+
+            return @rmdir($path);
         }
 
         return false;
@@ -61,7 +85,7 @@ class File
      * @param string $path
      * @param string $newPath
      * @param boolean $rename
-     * @return boolean
+     * @return boolean|array
      */
     public static function copy($path = null, $newPath = null, $rename = false)
     {
@@ -69,13 +93,17 @@ class File
             $pathInfo = pathinfo($path);
 
             if ($rename === false) {
-                $newFile = $newPath . $pathInfo['basename'];
+                $target = $newPath . $pathInfo['basename'];
             } else {
-                $newFile = $newPath . date('YmdHis') . rand(10000, 99999) . '.' . $pathInfo['extension'];
+                $target = $newPath . date('YmdHis') . rand(10000, 99999) . '.' . $pathInfo['extension'];
             }
 
             if (static::checkDir($newPath) === true) {
-                return @copy($path, $newFile);
+                if (@copy($path, $target) === true) {
+                    return array(
+                        'target' => $target
+                    );
+                }
             }
         }
 
@@ -88,7 +116,7 @@ class File
      * @param string $path
      * @param string $newPath
      * @param boolean $rename
-     * @return boolean
+     * @return boolean|array
      */
     public static function move($path = null, $newPath = null, $rename = false)
     {
@@ -96,13 +124,18 @@ class File
             $pathInfo = pathinfo($path);
 
             if ($rename === false) {
-                $newFile = $newPath . $pathInfo['basename'];
+                $target = $newPath . $pathInfo['basename'];
             } else {
-                $newFile = $newPath . date('YmdHis') . rand(10000, 99999) . '.' . $pathInfo['extension'];
+                $target = $newPath . date('YmdHis') . rand(10000, 99999) . '.' . $pathInfo['extension'];
             }
 
+
             if (static::checkDir($newPath) === true) {
-                return @rename($path, $newFile);
+                if (@rename($path, $target) === true) {
+                    return array(
+                        'target' => $target
+                    );
+                }
             }
         }
 
