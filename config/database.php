@@ -18,4 +18,9 @@ return array(
         'username' => 'root',
         'password' => 123456,
     ),
+    'test' => array(
+        'driver'   => 'sqlite',
+        'host'     => 'localhost',
+        'database' => dirname(__DIR__) . '/tests/tmp/test.sqlite',
+    ),
 );

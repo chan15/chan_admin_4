@@ -94,11 +94,13 @@ class Validation
      */
     public function length($name = null, $param = null)
     {
-        if ($this->hasValue($name) === false) {
+        if ($this->hasValue($name) !== false) {
             if (mb_strlen($this->inputs[$name]) !== intval($param)) {
                 $this->pass = false;
                 $this->message[$name][__FUNCTION__] = $this->translate($name) . $this->lang[__FUNCTION__] . $param;
             }
+        } else {
+            $this->pass = false;
         }
     }
 
@@ -111,11 +113,13 @@ class Validation
      */
     public function maxLength($name = null, $param = null)
     {
-        if ($this->hasValue($name) === false) {
+        if ($this->hasValue($name) !== false) {
             if (mb_strlen($this->inputs[$name]) > intval($param)) {
                 $this->pass = false;
                 $this->message[$name][__FUNCTION__] = $this->translate($name) . $this->lang[__FUNCTION__] . $param;
             }
+        } else {
+            $this->pass = false;
         }
     }
 
@@ -128,11 +132,13 @@ class Validation
      */
     public function minLength($name = null, $param = null)
     {
-        if ($this->hasValue($name) === false) {
+        if ($this->hasValue($name) !== false) {
             if (mb_strlen($this->inputs[$name]) < intval($param)) {
                 $this->pass = false;
                 $this->message[$name][__FUNCTION__] = $this->translate($name) . $this->lang[__FUNCTION__] . $param;
             }
+        } else {
+            $this->pass = false;
         }
     }
 
@@ -144,11 +150,13 @@ class Validation
      */
     public function integer($name = null)
     {
-        if ($this->hasValue($name) === false) {
+        if ($this->hasValue($name) !== false) {
             if (filter_var($this->inputs[$name], FILTER_VALIDATE_INT) === false) {
                 $this->pass = false;
                 $this->message[$name][__FUNCTION__] = $this->translate($name) . $this->lang[__FUNCTION__];
             }
+        } else {
+            $this->pass = false;
         }
     }
 
@@ -160,11 +168,13 @@ class Validation
      */
     public function bool($name = null)
     {
-        if ($this->hasValue($name) === false) {
+        if ($this->hasValue($name) !== false) {
             if (filter_var($this->inputs[$name], FILTER_VALIDATE_BOOLEAN) === false) {
                 $this->pass = false;
                 $this->message[$name][__FUNCTION__] = $this->translate($name) . $this->lang[__FUNCTION__];
             }
+        } else {
+            $this->pass = false;
         }
     }
 
@@ -176,11 +186,13 @@ class Validation
      */
     public function url($name = null)
     {
-        if ($this->hasValue($name) === false) {
+        if ($this->hasValue($name) !== false) {
             if (filter_var($this->inputs[$name], FILTER_VALIDATE_URL) === false) {
                 $this->pass = false;
                 $this->message[$name][__FUNCTION__] = $this->translate($name) . $this->lang[__FUNCTION__];
             }
+        } else {
+            $this->pass = false;
         }
     }
 
@@ -193,11 +205,13 @@ class Validation
      */
     public function max($name = null, $param = null)
     {
-        if ($this->hasValue($name) === false) {
+        if ($this->hasValue($name) !== false) {
             if (intval($this->inputs[$name]) > intval($param)) {
                 $this->pass = false;
                 $this->message[$name][__FUNCTION__] = $this->translate($name) . $this->lang[__FUNCTION__] . $param;
             }
+        } else {
+            $this->pass = false;
         }
     }
 
@@ -210,11 +224,13 @@ class Validation
      */
     public function min($name = null, $param = null)
     {
-        if ($this->hasValue($name) === false) {
+        if ($this->hasValue($name) !== false) {
             if (intval($this->inputs[$name]) < intval($param)) {
                 $this->pass = false;
                 $this->message[$name][__FUNCTION__] = $this->translate($name) . $this->lang[__FUNCTION__] . $param;
             }
+        } else {
+            $this->pass = false;
         }
     }
 
@@ -227,7 +243,7 @@ class Validation
      */
     public function unique($name = null, $param = null)
     {
-        if ($this->hasValue($name) === false) {
+        if ($this->hasValue($name) !== false) {
             list($config, $table, $field) = explode('.', $param);
 
             $db = new Database($config);
@@ -255,11 +271,13 @@ class Validation
      */
     public function email($name = null)
     {
-        if ($this->hasValue($name) === false) {
+        if ($this->hasValue($name) !== false) {
             if (filter_var($this->inputs[$name], FILTER_VALIDATE_EMAIL) === false) {
                 $this->pass = false;
                 $this->message[$name][__FUNCTION__] = $this->translate($name) . $this->lang[__FUNCTION__];
             }
+        } else {
+            $this->pass = false;
         }
     }
 

@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="bootstrap.php">
     <testsuites>
-        <testsuite name="all">
+        <testsuite name="testApp">
             <directory>tests/app/</directory>
+        </testsuite>
+        <testsuite name="testFile">
+            <file>tests/app/FileTest.php</file>
+        </testsuite>
+        <testsuite name="testValidation">
+            <file>tests/app/ValidationTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
