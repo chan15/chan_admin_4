@@ -158,7 +158,7 @@ class Validation
      * @param string $name
      * @return void
      */
-    public function bool($name)
+    public function bool($name = null)
     {
         if ($this->hasValue($name) === false) {
             if (filter_var($this->inputs[$name], FILTER_VALIDATE_BOOLEAN) === false) {
@@ -174,7 +174,7 @@ class Validation
      * @param string $name
      * @return void
      */
-    public function url($name)
+    public function url($name = null)
     {
         if ($this->hasValue($name) === false) {
             if (filter_var($this->inputs[$name], FILTER_VALIDATE_URL) === false) {
