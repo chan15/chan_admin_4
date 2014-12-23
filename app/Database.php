@@ -49,14 +49,19 @@ class Database
         $dsn = null;
         $host = $config['host'];
         $database = $config['database'];
-        $username = $config['username'];
-        $password = $config['password'];
+        $driver = $config['driver'];
+
+        if ($driver === 'mysql') {
+            $username = $config['username'];
+            $password = $config['password'];
+        }
+
         $options = array(
             PDO::ATTR_PERSISTENT => false,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         );
 
-        switch ($config['driver']) {
+        switch ($driver) {
             case 'mysql':
                 if (is_array($host) === true) {
                     $dsnRead = 'mysql:host=' . $host['read'] . ';dbname=' . $database . ';charset=utf8';
@@ -75,7 +80,7 @@ class Database
                 $this->dbhRead = new PDO($dsnRead, $username, $password, $options);
                 $this->dbhWrite = new PDO($dsnWrite, $username, $password, $options);
             } else {
-                switch ($config['driver']) {
+                switch ($driver) {
                     case 'mysql':
                         $this->dbh = new PDO($dsn, $username, $password, $options);
                         break;
