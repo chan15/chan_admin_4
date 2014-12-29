@@ -48,7 +48,7 @@ class Validation
                     if (method_exists(__CLASS__, $funcName) === true) {
                         $this->{$funcName}($name, $param);
                     } else {
-                        die("rule ${funcName} is not exists");
+                        die("Rule {$funcName} is not exists");
                     }
                 }
             }
