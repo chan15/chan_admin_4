@@ -8,5 +8,7 @@
  * @param string $symbol content replacement
  */
 function smarty_modifier_cut_str($string, $length = 30, $symbol = '...') {
+    global $app;
+
 	return $app->cutStr($string, $length, $symbol);
 }
