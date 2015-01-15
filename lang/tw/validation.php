@@ -8,6 +8,7 @@ return array(
     'length'    => '字數必須等於',
     'max'       => '不能大於',
     'maxLength' => '字數必須少於',
+    'min'       => '不能小於',
     'minLength' => '字數必須多於',
     'required'  => '為必填項目',
     'unique'    => '有重複資料',
