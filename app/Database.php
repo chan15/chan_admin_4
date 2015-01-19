@@ -559,8 +559,8 @@ class Database
         $result .= '<ul class="pagination">';
         $limitLinksEndCount = $limit;
         $temp = intval(($this->page + 1));
-        $startLink = intval((max(1, $temp - intval($limitLinksEndCount / 2))));
-        $temp = intval(($startLink + $limitLinksEndCount - 1));
+        $startLink = intval(max(1, $temp - intval($limitLinksEndCount / 2)));
+        $temp = intval($startLink + $limitLinksEndCount - 1);
         $endLink = min($temp, $this->totalPages + 1);
 
         // Prev page
@@ -577,7 +577,7 @@ class Database
         }
 
         if ($endLink !== $temp) {
-            $startLink = max(1, intval(($endLink-$limitLinksEndCount + 1)));
+            $startLink = max(1, intval($endLink - $limitLinksEndCount + 1));
         }
 
         for ($i = $startLink; $i <= $endLink; $i++) {
